@@ -5,6 +5,10 @@ VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetailerGuru.Api", "RetailerGuru.Api\RetailerGuru.Api.csproj", "{1F1EE043-9F4E-4A07-A648-20E96BCF159C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetailerGuru.Core", "RetailerGuru.Core\RetailerGuru.Core.csproj", "{B550854A-E3FB-45F9-AD89-85632641AF0A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetailerGuru.Data", "RetailerGuru.Data\RetailerGuru.Data.csproj", "{ADCCF972-1A1C-41B8-84DE-4632175D15EC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{1F1EE043-9F4E-4A07-A648-20E96BCF159C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F1EE043-9F4E-4A07-A648-20E96BCF159C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F1EE043-9F4E-4A07-A648-20E96BCF159C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B550854A-E3FB-45F9-AD89-85632641AF0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B550854A-E3FB-45F9-AD89-85632641AF0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B550854A-E3FB-45F9-AD89-85632641AF0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B550854A-E3FB-45F9-AD89-85632641AF0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADCCF972-1A1C-41B8-84DE-4632175D15EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADCCF972-1A1C-41B8-84DE-4632175D15EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADCCF972-1A1C-41B8-84DE-4632175D15EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADCCF972-1A1C-41B8-84DE-4632175D15EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
