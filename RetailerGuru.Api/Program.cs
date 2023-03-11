@@ -63,6 +63,16 @@ foreach (var description in apiVersionDescriptionProvider.ApiVersionDescriptions
     });
 }
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("EnableCors", builder =>
+    {
+        builder.AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -80,6 +90,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+app.UseCors("EnableCors");
 
 app.UseHttpsRedirection();
 

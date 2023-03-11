@@ -13,22 +13,25 @@ namespace RetailerGuru.Api.Controllers.Private
             new Product
             {
                 Id = 1,
-                CompanyId = new Guid("1"),
+                CompanyId = Guid.NewGuid(),
                 Price = (decimal)1.123,
+                Name = "Product1",
                 StockAmount = 100,
             },
             new Product
             {
                 Id = 2,
-                CompanyId = new Guid("1"),
+                CompanyId = Guid.NewGuid(),
                 Price = (decimal)2.123,
+                Name = "Product2",
                 StockAmount = 50,
             },
             new Product
             {
                 Id = 3,
-                CompanyId = new Guid("2"),
+                CompanyId = Guid.NewGuid(),
                 Price = (decimal)3.123,
+                Name = "Product3",
                 StockAmount = 50,
             },
         };

@@ -7,7 +7,7 @@ namespace RetailerGuru.Data
     {
         private static bool _isSeeded = false;
 
-        public RetailerGuruContext()
+        public RetailerGuruContext(DbContextOptions options) : base(options)
         {
             if(!_isSeeded)
                 Seed();
