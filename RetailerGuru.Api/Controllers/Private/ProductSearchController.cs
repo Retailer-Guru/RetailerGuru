@@ -1,5 +1,5 @@
-﻿using BillCreator.Api.Infrastructure;
-using BillCreator.Api.Infrastructure.Versions;
+﻿using RetailerGuru.Api.Infrastructure;
+using RetailerGuru.Api.Infrastructure.Versions;
 
 namespace RetailerGuru.Api.Controllers.Private
 {

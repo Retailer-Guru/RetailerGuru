@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BillCreator.Api.Infrastructure
+namespace RetailerGuru.Api.Infrastructure
 {
     [ApiController]
     [Produces("application/json")]

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace BillCreator.Api.Infrastructure.Versions
+namespace RetailerGuru.Api.Infrastructure.Versions
 {
     public sealed class SpaApiV1Attribute : ApiVersionAttribute
     {

@@ -1,6 +1,6 @@
 ﻿using NJsonSchema.Generation;
 
-namespace BillCreator.Api.Infrastructure
+namespace RetailerGuru.Api.Infrastructure
 {
     public class FullSchemaNameGenerator : ISchemaNameGenerator
     {

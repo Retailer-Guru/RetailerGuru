@@ -1,7 +1,8 @@
-using BillCreator.Api.Infrastructure;
+using RetailerGuru.Api.Infrastructure;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using SimpleInjector;
 using SimpleInjector.Lifestyles;
+using RetailerGuru.Core.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +12,10 @@ var container = new Container();
 // Integrate SimpleInjector
 container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
 
-// TODO: Implement Core
+container.AddCore(o =>
+{
+    o.UseInMemoryDBContext = true;  // TODO: Change to live DB later
+});
 
 builder.Services.AddControllers();
 
