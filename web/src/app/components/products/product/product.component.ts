@@ -1,6 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Product } from 'src/app/models/product';
-import { GlobalService } from 'src/app/services/global.service';
 
 @Component({
   selector: 'app-product',
@@ -9,9 +7,9 @@ import { GlobalService } from 'src/app/services/global.service';
 })
 export class ProductComponent implements OnInit {
 
-  @Input() product : Product = new Product();
+  @Input() product : any;
 
-  constructor(private globalService : GlobalService) { }
+  constructor() { }
 
   ngOnInit() {
   }

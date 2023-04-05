@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/models/product';
-import { GlobalService } from 'src/app/services/global.service';
 
 @Component({
   selector: 'app-productsview',
@@ -9,24 +7,16 @@ import { GlobalService } from 'src/app/services/global.service';
 })
 export class ProductsviewComponent implements OnInit {
 
-  constructor(private globalService : GlobalService) { }
+  constructor() { }
 
-  products : Product[] = [];
+  products : any;
 
   ngOnInit() {
     this.loadData();
   }
 
   private loadData(){
-    this.globalService.getObject<Product[]>('Product/GetProdcuts')
-      .subscribe(res => {
-        this.products = res;
-        console.log(res);
 
-        console.log(this.products);
-
-
-      })
   }
 
 }

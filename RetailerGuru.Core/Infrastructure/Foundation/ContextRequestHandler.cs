@@ -13,7 +13,9 @@ namespace RetailerGuru.Core.Infrastructure.Foundation
             _context = context;
         }
 
-        public abstract Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken);
+#pragma warning disable CS8613 // Nullability of reference types in return type doesn't match implicitly implemented member.
+        public abstract Task<TResponse?> Handle(TRequest request, CancellationToken cancellationToken);
+#pragma warning restore CS8613 // Nullability of reference types in return type doesn't match implicitly implemented member.
     }
 
     public abstract class ContextRequestHandler<TRequest> : ContextRequestHandler<TRequest, Unit>

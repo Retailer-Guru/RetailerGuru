@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RetailerGuru.Data.Models;
 using RetailerGuru.Data.Models.Base;
 
 namespace RetailerGuru.Data
@@ -35,7 +36,31 @@ namespace RetailerGuru.Data
 
             _isSeeded = true;
 
-            // TODO: Testdaten erstellen
+            Add(new Product
+            {
+                CompanyId = Guid.NewGuid(),
+                Price = (decimal)1.123,
+                Name = "Product1",
+                StockAmount = 100,
+            });
+
+            Add(new Product
+            {
+                CompanyId = Guid.NewGuid(),
+                Price = (decimal)2.123,
+                Name = "Product2",
+                StockAmount = 50,
+            });
+
+            Add(new Product
+            {
+                CompanyId = Guid.NewGuid(),
+                Price = (decimal)3.123,
+                Name = "Product3",
+                StockAmount = 50,
+            });
+
+            SaveChanges();
         }
     }
 }
