@@ -43,5 +43,18 @@ namespace RetailerGuru.Api.Controllers.Private
                 StockAmount = model.StockAmount,
             });
         }
+
+        [HttpPost("UpdateProduct")]
+        public void UpdateProduct([FromBody] ProductModel model)
+        {
+            _mediator.Send(new UpdateProduct.Command
+            {
+                Id = model.Id,
+                Name = model.Name,
+                CompanyId = model.CompanyId,
+                Price = model.Price,
+                StockAmount = model.StockAmount,
+            });
+        }
     }
 }
