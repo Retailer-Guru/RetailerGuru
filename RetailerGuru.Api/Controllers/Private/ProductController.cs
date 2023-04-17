@@ -1,9 +1,8 @@
-﻿using RetailerGuru.Api.Infrastructure;
-using RetailerGuru.Api.Infrastructure.Versions;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using RetailerGuru.Data.Models;
 using RetailerGuru.Api.Controllers.Models;
-using MediatR;
+using RetailerGuru.Api.Infrastructure;
+using RetailerGuru.Api.Infrastructure.Versions;
 using RetailerGuru.Core.Commands.Products;
 using RetailerGuru.Core.Queries.Products;
 
@@ -55,6 +54,12 @@ namespace RetailerGuru.Api.Controllers.Private
                 Price = model.Price,
                 StockAmount = model.StockAmount,
             });
+        }
+
+        [HttpDelete("DeleteProduct/{id}")]
+        public void DeleteProduct(int id)
+        {
+            _mediator.Send(new DeleteProduct.Command { Id = id });
         }
     }
 }
