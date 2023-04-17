@@ -15,4 +15,7 @@ export class ProductComponent implements OnInit {
   ngOnInit() {
   }
 
+  delete(){
+    console.log("deletebuttonpress");
+  }
 }

@@ -1,4 +1,4 @@
-<div class="card" style="width: 18rem;">
+<div  style="width: 18rem;">
   <img src="..." class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">{{product.name}}</h5>
@@ -7,6 +7,7 @@
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productEditModal">
       Edit Product
     </button>
+    <button type="button" class="btn btn-danger" (click)="delete()">Löschen</button>
   </div>
 </div>
 
@@ -14,6 +15,20 @@
 
 <!-- Modal -->
 <div class="modal fade" id="productEditModal" tabindex="-1" aria-labelledby="productEditModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="productEditModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-editproduct
+        [modelId]="product.id"></app-editproduct>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="productDeleteModal" tabindex="-1" aria-labelledby="productDeleteModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
