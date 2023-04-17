@@ -22,6 +22,7 @@ namespace RetailerGuru.Api.Controllers.Private
             return "TestCompany";
         }
 
+        // TODO: durch echte funktion ersetzen
         [HttpGet("GetFirstCompanyId")] 
         public async Task<Guid> GetFirstCompanyId()
         {

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RetailerGuru.Api.Controllers.Models;
 using RetailerGuru.Api.Infrastructure;
@@ -30,6 +31,7 @@ namespace RetailerGuru.Api.Controllers.Private
             return _mediator.Send(new GetProducts.Query());
         }
 
+        [Authorize]
         [HttpPost("AddProduct")]
         public void AddProduct([FromBody] ProductModel model)
         {
@@ -43,6 +45,7 @@ namespace RetailerGuru.Api.Controllers.Private
             });
         }
 
+        [Authorize]
         [HttpPost("UpdateProduct")]
         public void UpdateProduct([FromBody] ProductModel model)
         {
@@ -56,6 +59,7 @@ namespace RetailerGuru.Api.Controllers.Private
             });
         }
 
+        [Authorize]
         [HttpDelete("DeleteProduct/{id}")]
         public void DeleteProduct(int id)
         {

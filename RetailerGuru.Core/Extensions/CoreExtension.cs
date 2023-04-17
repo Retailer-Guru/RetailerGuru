@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using MediatR.SimpleInjector;
 using Microsoft.EntityFrameworkCore;
+using RetailerGuru.Core.Services;
 using RetailerGuru.Data;
 using SimpleInjector;
 
@@ -19,6 +20,8 @@ namespace RetailerGuru.Core.Extensions
             container.BuildMediator(currentAssembly);
 
             RegisterContext(container, config);
+
+            container.Register<AuthService>(Lifestyle.Singleton);
 
             return container;
         }
