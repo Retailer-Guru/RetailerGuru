@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RetailerGuru.Data.Models
 {
+    // TODO: email hinzufügen
     public record class User : BaseEntity<Guid>
     {
         [Required]

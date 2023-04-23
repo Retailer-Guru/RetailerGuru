@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using SimpleInjector;
 using SimpleInjector.Lifestyles;
 using RetailerGuru.Core.Extensions;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,7 +40,23 @@ builder.Services.AddVersionedApiExplorer(options =>
 // TODO: implement jwt and services
 builder.Services.AddAuthentication(options =>
 {
-    
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+
+        ValidIssuer = builder.Configuration.GetSection("JwtBearer")["Issuer"],
+        ValidAudience = builder.Configuration.GetSection("JwtBearer")["Audience"],
+
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("JwtBaerer")["Key"].Decode64()))
+    };
 });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -50,6 +69,7 @@ var sp = builder.Services.BuildServiceProvider();
 var apiVersionDescriptionProvider = sp.GetService<IApiVersionDescriptionProvider>();
 
 var assemblyName = typeof(Program).Assembly.GetName().Name;
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
 foreach (var description in apiVersionDescriptionProvider.ApiVersionDescriptions)
 {
     builder.Services.AddSwaggerDocument(c =>
@@ -68,6 +88,7 @@ foreach (var description in apiVersionDescriptionProvider.ApiVersionDescriptions
         c.SchemaNameGenerator = new FullSchemaNameGenerator();
     });
 }
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
 
 builder.Services.AddCors(options =>
 {
@@ -96,12 +117,17 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.UseCors("EnableCors");
 
 app.UseHttpsRedirection();
 
+app.UseCors("EnableCors");
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+((IHost)app).UseSimpleInjector(container);
+container.Verify();
 
 app.Run();

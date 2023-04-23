@@ -9,13 +9,13 @@
         <form>
           <!-- Email input -->
           <div class="form-outline mb-4">
-            <input type="email" id="form1Example13" class="form-control form-control-lg" />
-            <label class="form-label" for="form1Example13">Email address</label>
+            <input type="text" id="form1Example13" [(ngModel)]="loginModel.username" name="usernameInput" class="form-control form-control-lg" />
+            <label class="form-label" for="form1Example13">Username</label>
           </div>
 
           <!-- Password input -->
           <div class="form-outline mb-4">
-            <input type="password" id="form1Example23" class="form-control form-control-lg" />
+            <input type="password" id="form1Example23" [(ngModel)]="loginModel.password" name="passwordInput" class="form-control form-control-lg" />
             <label class="form-label" for="form1Example23">Password</label>
           </div>
 
@@ -30,7 +30,7 @@
 
           <!-- Submit button -->
           <div class="row">
-            <button type="submit" class="col-md-12 btn btn-primary btn-lg btn-block">Sign in</button>
+            <button type="submit" class="col-md-12 btn btn-primary btn-lg btn-block" (click)="login()">Sign in</button>
           </div>
 
         </form>

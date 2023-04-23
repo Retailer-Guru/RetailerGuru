@@ -2,10 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using RetailerGuru.Api.Controllers.Models;
 using RetailerGuru.Api.Infrastructure;
+using RetailerGuru.Api.Infrastructure.Versions;
 using RetailerGuru.Core.Services;
 
 namespace RetailerGuru.Api.Controllers.Private
 {
+    [SpaApiV1]
     public class AuthController : ApiController
     {
         private readonly AuthService _authService;

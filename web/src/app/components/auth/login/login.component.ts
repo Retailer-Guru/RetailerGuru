@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginModel } from 'src/app/models/login-model';
+import { GlobalService } from 'src/clients/global_service';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  loginModel : LoginModel = new LoginModel();
+
+  constructor(private client : GlobalService) { }
 
   ngOnInit() {
+  }
+
+  login()
+  {
+    if(this.loginModel.username === "")
+      return;
+
+    if(this.loginModel.password === "")
+      return;
+
+    this.client.postObject("api/v1-spa/Auth/Login", this.loginModel)
+      .subscribe(res => {
+        console.log(res);
+
+      })
   }
 
 }
