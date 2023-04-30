@@ -10,6 +10,11 @@ import { ProductsviewComponent } from './components/products/productsview/produc
 import { EditproductComponent } from './components/products/editproduct/editproduct.component';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './components/auth/login/login.component';
+import { JwtModule } from '@auth0/angular-jwt';
+
+export function tokenGetter(){
+  return localStorage.getItem("jwt")
+}
 
 @NgModule({
   declarations: [
@@ -24,7 +29,12 @@ import { LoginComponent } from './components/auth/login/login.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

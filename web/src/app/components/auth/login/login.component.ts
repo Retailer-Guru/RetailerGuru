@@ -26,9 +26,10 @@ export class LoginComponent implements OnInit {
 
     this.client.postObject("api/v1-spa/Auth/Login", this.loginModel)
       .subscribe(res => {
-        console.log(res);
-
-      })
+        localStorage.setItem("jwt", (<any>res).token);
+        localStorage.setItem("userId", (<any>res).userId);
+        localStorage.setItem("companyId", (<any>res).companyId);
+      });
   }
 
 }
