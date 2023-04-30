@@ -7,7 +7,7 @@ using RetailerGuru.Core.Queries.Companyies;
 namespace RetailerGuru.Api.Controllers.Private
 {
     [SpaApiV1]
-    public class CompanyController : ApiController
+    public class CompanyController : AuthorizedApiController
     {
         private readonly IMediator _mediator;
 
@@ -19,14 +19,9 @@ namespace RetailerGuru.Api.Controllers.Private
         [HttpGet("GetCompanyName")]
         public string GetCompanyName()
         {
-            return "TestCompany";
+            throw new NotImplementedException();
         }
 
-        // TODO: durch echte funktion ersetzen
-        [HttpGet("GetFirstCompanyId")] 
-        public async Task<Guid> GetFirstCompanyId()
-        {
-            return await _mediator.Send(new GetFirstCompanyId.Query());
-        }
+        
     }
 }

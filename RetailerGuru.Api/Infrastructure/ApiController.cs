@@ -10,4 +10,10 @@ namespace RetailerGuru.Api.Infrastructure
     {
 
     }
+
+    [Authorize]
+    public abstract class AuthorizedApiController : ApiController
+    {
+
+    }
 }

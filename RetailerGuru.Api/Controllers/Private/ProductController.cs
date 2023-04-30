@@ -10,7 +10,7 @@ using RetailerGuru.Core.Queries.Products;
 namespace RetailerGuru.Api.Controllers.Private
 {
     [SpaApiV1]
-    public class ProductController : ApiController
+    public class ProductController : AuthorizedApiController
     {
         private readonly IMediator _mediator;
 
