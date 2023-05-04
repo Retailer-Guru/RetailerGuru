@@ -54,7 +54,7 @@ namespace RetailerGuru.Core.Queries.Statistics
                         Date = new DateTime().AddYears(x.Key.Year).AddMonths(x.Key.Month).AddDays(x.Key.Day),
                         Count = x.Count()
                     }).ToListAsync()
-                }
+                };
             }
         }
     }
