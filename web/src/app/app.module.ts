@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -8,9 +8,12 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProductComponent } from './components/products/product/product.component';
 import { ProductsviewComponent } from './components/products/productsview/productsview.component';
 import { EditproductComponent } from './components/products/editproduct/editproduct.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/auth/login/login.component';
 import { JwtModule } from '@auth0/angular-jwt';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { BearerAuthInterceptor } from 'src/clients/bearerInterceptor';
 
 export function tokenGetter(){
   return localStorage.getItem("jwt")
@@ -30,13 +33,18 @@ export function tokenGetter(){
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
+    NgApexchartsModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter
       }
-    })
+    }),
+    NgbModalModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: BearerAuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

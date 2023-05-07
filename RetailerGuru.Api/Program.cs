@@ -37,7 +37,6 @@ builder.Services.AddVersionedApiExplorer(options =>
     options.SubstituteApiVersionInUrl = true;
 });
 
-// TODO: implement jwt and services
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -52,16 +51,14 @@ builder.Services.AddAuthentication(options =>
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
 
-        ValidIssuer = builder.Configuration.GetSection("JwtBearer")["Issuer"],
-        ValidAudience = builder.Configuration.GetSection("JwtBearer")["Audience"],
+        ValidIssuer = builder.Configuration.GetSection("JwtBaerer")["Issuer"],
+        ValidAudience = builder.Configuration.GetSection("JwtBaerer")["Audience"],
 
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("JwtBaerer")["Key"].Decode64()))
     };
 });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 #pragma warning disable ASP0000 // Do not call 'IServiceCollection.BuildServiceProvider' in 'ConfigureServices'
 var sp = builder.Services.BuildServiceProvider();
@@ -100,6 +97,8 @@ builder.Services.AddCors(options =>
     });
 });
 
+//builder.Services.AddEndpointsApiExplorer();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -119,6 +118,8 @@ if (app.Environment.IsDevelopment())
 
 
 app.UseHttpsRedirection();
+
+app.UseRouting();
 
 app.UseCors("EnableCors");
 

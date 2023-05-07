@@ -1,3 +1,7 @@
-<div *ngFor="let product of products">
-  <app-product [product]="product"></app-product>
+<br>
+<div class="row itemsBlock">
+  <div *ngFor="let product of products" class="col-md-3">
+    <app-product [product]="product"></app-product>
+  </div>
 </div>
+

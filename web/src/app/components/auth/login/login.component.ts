@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { LoginModel } from 'src/app/models/login-model';
 import { GlobalService } from 'src/clients/global_service';
 
@@ -8,6 +8,8 @@ import { GlobalService } from 'src/clients/global_service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
+  @Output() buttonPressed = new EventEmitter();
 
   loginModel : LoginModel = new LoginModel();
 
@@ -23,6 +25,8 @@ export class LoginComponent implements OnInit {
 
     if(this.loginModel.password === "")
       return;
+
+    this.buttonPressed.emit();
 
     this.client.postObject("api/v1-spa/Auth/Login", this.loginModel)
       .subscribe(res => {
