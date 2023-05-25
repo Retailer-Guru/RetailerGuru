@@ -18,9 +18,9 @@ namespace RetailerGuru.Api.Controllers.Private
 
         // TODO: Vll ActionResult austauschen
         [HttpGet("GetDailyProductSearchStatistic/{productId}")]
-        public async Task<IActionResult> GetDailyProductSearchStatistic(int productId)
+        public async Task<IActionResult> GetDailyProductSearchStatistic(int productId, DateTime from, DateTime to)
         {
-            return Ok(await _mediator.Send(new GetDailyProductSearch.Query { Id = productId }));
+            return Ok(await _mediator.Send(new GetDailyProductSearch.Query { Id = productId, From = from, To = to }));
         }
     }
 }

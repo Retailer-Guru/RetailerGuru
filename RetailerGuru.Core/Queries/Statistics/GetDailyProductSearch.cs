@@ -3,12 +3,7 @@ using RetailerGuru.Core.Infrastructure;
 using RetailerGuru.Core.Infrastructure.Foundation;
 using RetailerGuru.Data;
 using RetailerGuru.Data.Models;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RetailerGuru.Core.Queries.Statistics
 {
@@ -18,6 +13,12 @@ namespace RetailerGuru.Core.Queries.Statistics
         {
             [Required]
             public int Id { get; set; }
+
+            [Required]
+            public DateTime From { get; set; }
+
+            [Required]
+            public DateTime To { get; set; }
         }
 
         public class Result
@@ -47,7 +48,7 @@ namespace RetailerGuru.Core.Queries.Statistics
                 return new Result
                 {
                     Items = await _context.Set<ProductSearch>()
-                    .Where(x => x.ProductId == product.Id)
+                    .Where(x => x.ProductId == product.Id && x.Date >= request.From && x.Date <= request.To)
                     .GroupBy(x => new { x.Date.Year, x.Date.Month, x.Date.Day })
                     .Select(x => new Result.Item
                     {

@@ -14,6 +14,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { BearerAuthInterceptor } from 'src/clients/bearerInterceptor';
+import { StatistikviewComponent } from './components/statistiks/statistikview/statistikview.component';
 
 export function tokenGetter(){
   return localStorage.getItem("jwt")
@@ -26,7 +27,8 @@ export function tokenGetter(){
     ProductsviewComponent,
     ProductComponent,
     EditproductComponent,
-    LoginComponent
+    LoginComponent,
+    StatistikviewComponent
   ],
   imports: [
     BrowserModule,
