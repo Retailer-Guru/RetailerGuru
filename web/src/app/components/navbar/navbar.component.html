@@ -1,0 +1,42 @@
+<nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+  <div class="container-fluid">
+    <img [src]="'assets/images/logo-removebg-preview.png'" width="50" height="50">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page" [routerLink]="['home']">Home</a>
+        <a class="nav-link" *ngIf="isUserAuthenticated()" [routerLink]="['products']">Products</a>
+        <a class="nav-link" [routerLink]="['aboutus']">About Us</a>
+      </div>
+    </div>
+    <div class="d-flex">
+      <button *ngIf="!isUserAuthenticated()" class="btn btn-primary" (click)="openModal(loginModal)">Login</button>
+      <div *ngIf="isUserAuthenticated()" class="collapse navbar-collapse d-flex" id="navbarNavDarkDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              User
+              <!--<img src="../../../assets/images/blank-profile-picture-g212366275_640.png" alt="" width="32" height="32" class="rounded-circle me-2">-->
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+              <li><a class="dropdown-item" [routerLink]="['user']">Profile</a></li>
+              <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Modal -->
+<ng-template #loginModal let-loginModal id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-content">
+    <div class="modal-body modal-overlay">
+      <app-login (buttonPressed)="loginModal.close()"></app-login>
+    </div>
+  </div>
+</ng-template>
+

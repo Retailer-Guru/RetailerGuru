@@ -1,0 +1,18 @@
+<br>
+<div class="container">
+  <div class="row">
+    <form class="input-group">
+        <input class="form-control form-control-lg ml-3" [(ngModel)]="searchInput" name="searchTextInput" type="text" placeholder="Search">
+        <button class="btn btn-secondary btn-lg" type="submit" (click)="search()">Search</button>
+    </form>
+  </div>
+  <br>
+  <div class="row itemsBlock">
+    <div *ngFor="let product of outputlist" class="col-md-3">
+      <app-product [product]="product" [viewOnly]="true"></app-product>
+    </div>
+  </div>
+</div>
+
+
+

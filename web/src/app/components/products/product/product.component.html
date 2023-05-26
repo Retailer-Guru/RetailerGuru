@@ -1,0 +1,43 @@
+<div class="border border-dark" style="width: 18rem;">
+  <img [src]="'assets/images/Image_not_available.png'" class="card-img-top border" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{product.name}}</h5>
+    <p class="card-text">
+    </p>
+    <br>
+    <button *ngIf="!viewOnly" type="button" class="container btn btn-primary rounded-0" data-bs-toggle="modal" data-bs-target="#productEditModal"> Edit Product </button>
+    <button *ngIf="!viewOnly" type="button" class="container btn btn-danger rounded-0" (click)="delete()">Löschen</button>
+    <button *ngIf="!viewOnly" class="container btn btn-secondary btn-block rounded-0" type="button" [routerLink]="['/statisticsview', product.id]">Show Statistics</button>
+  </div>
+</div>
+<br>
+
+<!-- Modal -->
+<div class="modal fade" id="productEditModal" tabindex="-1" aria-labelledby="productEditModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="productEditModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-editproduct
+        [modelId]="product.id"></app-editproduct>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="productDeleteModal" tabindex="-1" aria-labelledby="productDeleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="productEditModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-editproduct
+        [modelId]="product.id"></app-editproduct>
+      </div>
+    </div>
+  </div>
+</div>
