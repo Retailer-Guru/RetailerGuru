@@ -19,6 +19,7 @@ import { StatistikviewComponent } from './components/statistiks/statistikview/st
 import { DefaultbargraphComponent } from './components/statistiks/defaultbargraph/defaultbargraph.component';
 
 
+
 export function tokenGetter(){
   return localStorage.getItem("jwt")
 }
