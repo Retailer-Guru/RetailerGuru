@@ -109,6 +109,12 @@ namespace RetailerGuru.Data
             Add(new ProductSearch { IpAdress = "qwert", ProductId = product.Id, Date = DateTime.Now.AddDays(-2) });
             Add(new ProductSearch { IpAdress = "qwert", ProductId = product.Id, Date = DateTime.Now.AddDays(-3) });
 
+            Add(new VerifiedSale { Amount = 5, Date = DateTime.Now, ProductId = product.Id });
+            Add(new VerifiedSale { Amount = 12, Date = DateTime.Now, ProductId = product.Id });
+            Add(new VerifiedSale { Amount = 7, Date = DateTime.Now.AddDays(-1), ProductId = product.Id });
+            Add(new VerifiedSale { Amount = 15, Date = DateTime.Now.AddDays(-2), ProductId = product.Id });
+            Add(new VerifiedSale { Amount = 2, Date = DateTime.Now.AddDays(-3), ProductId = product.Id });
+
             SaveChanges();
         }
     }

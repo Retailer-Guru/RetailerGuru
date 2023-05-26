@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import * as ApexCharts from 'apexcharts';
 import { ChartComponent } from 'ng-apexcharts';
 import { Subscription } from 'rxjs';
 import { ChartOptions } from 'src/app/models/chart-options';
@@ -12,7 +13,7 @@ import { GlobalService } from 'src/clients/global_service';
   templateUrl: './defaultbargraph.component.html',
   styleUrls: ['./defaultbargraph.component.css']
 })
-export class DefaultbargraphComponent implements OnInit, OnChanges {
+export class DefaultbargraphComponent implements OnInit {
 
   @ViewChild("chart") chart!: ChartComponent;
   public chartOptions: Partial<ChartOptions> | any = {
@@ -35,6 +36,7 @@ export class DefaultbargraphComponent implements OnInit, OnChanges {
   };
 
   @Input() productId : number = 0;
+  @Input() salesMode : boolean = false;
 
   constructor(private client : GlobalService) {
   }
@@ -44,36 +46,39 @@ export class DefaultbargraphComponent implements OnInit, OnChanges {
     this.loadData();
   }
 
-  ngOnChanges(){
-    this.loadData();
-  }
-
-
   private loadData(){
     if(this.productId === 0)
       return;
 
     let now = new Date();
 
+    console.log("execute");
+
+
     let model = new StatisticsModel();
     model.id = this.productId;
     model.from = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 7);
     model.to = now;
 
-    this.client.postObject('api/v1-spa/Statistics/GetDailyProductSearchStatistic', model)
+    this.client.postObject(this.salesMode
+        ? 'api/v1-spa/Statistics/GetDailyProductVerifiedSalesStatistic'
+        : 'api/v1-spa/Statistics/GetDailyProductSearchStatistic', model)
       .subscribe(res => {
         let dataList : ItemList<DefaultStatModel> = (<any>res).result;
         let dataLine : number[] = dataList.items.map(x => x.count)
         let descriptionLine : string[] = dataList.items.map(x => x.date.toString());
 
         this.chartOptions.series = [{
+          name: "Product Searches",
           data: dataLine
         }];
 
         this.chartOptions.xaxis = {
           categories: descriptionLine
-        }
+        };
       });
+
+
   }
 
 }

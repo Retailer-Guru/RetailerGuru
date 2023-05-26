@@ -28,7 +28,6 @@ export class NavbarComponent implements OnInit {
     localStorage.removeItem("userId");
     localStorage.removeItem("companyId");
 
-    // TODO: echte landingpage einfügen
     this.router.navigate(["home"])
     window.location.reload();
   }
