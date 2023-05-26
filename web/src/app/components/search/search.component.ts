@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ItemList } from 'src/app/models/item-list-model';
+import { GlobalService } from 'src/clients/global_service';
+import { Product } from 'src/app/models/product-model'
 
 @Component({
   selector: 'app-search',
@@ -7,15 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchComponent implements OnInit {
 
-  searchinput : string = ""
-  outputlist : string[] = ["Eins","Zwei","Drei"]
+  searchInput : string = "";
+  outputlist : Product[] = [];
 
-  constructor() { }
+  constructor(private client : GlobalService) { }
 
   ngOnInit() {
   }
 
-  click() {
+  search() {
+    if(!this.searchInput)
+      return;
 
+    this.client.getObject('/api/v1-spa/Search/GetProductSearch' + '/' + this.searchInput)
+      .subscribe(res => {
+        this.outputlist = (<any>res).result.items;
+      });
   }
 }

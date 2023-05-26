@@ -16,6 +16,8 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { BearerAuthInterceptor } from 'src/clients/bearerInterceptor';
 import { SearchComponent } from './components/search/search.component';
 import { StatistikviewComponent } from './components/statistiks/statistikview/statistikview.component';
+import { DefaultbargraphComponent } from './components/statistiks/defaultbargraph/defaultbargraph.component';
+
 
 
 
@@ -32,7 +34,8 @@ export function tokenGetter(){
     EditproductComponent,
     LoginComponent,
     SearchComponent,
-    StatistikviewComponent
+    StatistikviewComponent,
+    DefaultbargraphComponent
   ],
   imports: [
     BrowserModule,
