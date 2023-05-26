@@ -17,10 +17,29 @@ namespace RetailerGuru.Api.Controllers.Private
         }
 
         // TODO: Vll ActionResult austauschen
-        [HttpGet("GetDailyProductSearchStatistic/{productId}")]
-        public async Task<IActionResult> GetDailyProductSearchStatistic(int productId, DateTime from, DateTime to)
+        [HttpGet("GetDailyProductSearchStatistic/{productId}/{from}/{to}")]
+        public IActionResult GetDailyProductSearchStatistic(int productId, DateTime from, DateTime to)
         {
-            return Ok(await _mediator.Send(new GetDailyProductSearch.Query { Id = productId, From = from, To = to }));
+            return Ok(_mediator.Send(new GetDailyProductSearch.Query { Id = productId, From = from, To = to }));
         }
+
+        [HttpGet("GetDailyCompanyProductSearchStatistic/{companyId}/{from}/{to}")]
+        public IActionResult GetDailyCompanySearchStatistic(Guid companyId, DateTime from, DateTime to)
+        {
+            return Ok(_mediator.Send(new GetDailyCompanyProductSearch.Query { CompanyId = companyId, From = from, To = to }));
+        }
+
+        [HttpGet("GetDailyProductVerifiedSalesStatistic/{productId}/{from}/{to}")]
+        public IActionResult GetDailyProductVerifiedSalesStatistic(int productId, DateTime from, DateTime to)
+        {
+            return Ok(_mediator.Send(new GetDailyProductVerifiedSales.Query { ProductId = productId, From = from, To = to }));
+        }
+
+        [HttpGet("GetDailyCompanyVerifiedSalesStatistic/{companyId}/{from}/{to}")]
+        public IActionResult GetDailyCompanyVerifiedSalesStatistic(Guid companyId, DateTime from, DateTime to)
+        {
+            return Ok(_mediator.Send(new GetDailyCompanyVerifiedSales.Query { CompanyId = companyId, From = from, To = to }));
+        }
+
     }
 }
