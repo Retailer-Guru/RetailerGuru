@@ -20,6 +20,7 @@ import { DefaultbargraphComponent } from './components/statistiks/defaultbargrap
 
 
 
+
 export function tokenGetter(){
   return localStorage.getItem("jwt")
 }

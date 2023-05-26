@@ -12,4 +12,8 @@ export class AboutusComponent implements OnInit {
   ngOnInit() {
   }
 
+  bild1:string = 'assets/images/1234.png';
+  bild2:string = 'assets/images/lisa.jpg';
+  bild3:string = 'assets/images/tobi.jpg'
 }
+
