@@ -18,19 +18,14 @@ export class EditproductComponent implements OnInit {
   constructor(private client : GlobalService) {  }
 
   ngOnInit() {
+    if(!this.modelId)
+      return;
+
     if(this.modelId != 0){
-      this.client.getObject<Product>("/api/v1-spa/Product/GetProduct/" + this.modelId.toString())
+      this.client.getObject<Product>("/api/v1-spa/Product/GetProduct/" + this.modelId?.toString())
         .subscribe(res => {
           this.product = res;
-          console.log(res);
-
         });
-
-      // TODO: companyId durch login automatisieren
-      this.client.getObject<string>("/api/v1-spa/Company/GetFirstCompanyId")
-      .subscribe(res => {
-        this.companyId = res;
-      });
     }
   }
 
@@ -39,8 +34,7 @@ export class EditproductComponent implements OnInit {
       this.reload.emit(false);
     }
 
-    // TODO: companyId durch login automatisieren
-    this.product.companyId = this.companyId;
+    this.product.companyId = localStorage.getItem("companyId") ?? "";
 
     if(this.modelId == 0){
       this.client.postObject<Product>("/api/v1-spa/Product/AddProduct", this.product)
@@ -54,7 +48,7 @@ export class EditproductComponent implements OnInit {
           this.reload.emit(true);
         });
     }
-
+-
     this.reload.emit(false);
   }
 

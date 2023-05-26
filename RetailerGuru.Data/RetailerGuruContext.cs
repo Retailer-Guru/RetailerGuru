@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RetailerGuru.Data.Models;
 using RetailerGuru.Data.Models.Base;
-using static System.Net.Mime.MediaTypeNames;
 using System.Text;
 using System.Security.Cryptography;
 
@@ -10,6 +9,8 @@ namespace RetailerGuru.Data
     public class RetailerGuruContext : DbContext
     {
         private static bool _isSeeded = false;
+
+        public bool IsInMemory { get => Database.IsInMemory(); }
 
         public RetailerGuruContext(DbContextOptions options) : base(options)
         {
@@ -74,6 +75,22 @@ namespace RetailerGuru.Data
                 StockAmount = 50,
             });
 
+            Add(new Product
+            {
+                CompanyId = company.Id,
+                Price = (decimal)3.123,
+                Name = "Product4",
+                StockAmount = 50,
+            });
+
+            Add(new Product
+            {
+                CompanyId = company.Id,
+                Price = (decimal)3.123,
+                Name = "testqert",
+                StockAmount = 50,
+            });
+
             using var sha = SHA256.Create();
             Add(new User
             {
@@ -81,6 +98,16 @@ namespace RetailerGuru.Data
                 Username = "test",
                 Password = Encoding.UTF8.GetString(sha.ComputeHash(Encoding.UTF8.GetBytes("test")))
             });
+
+            SaveChanges();
+
+            var product = Set<Product>().First();
+
+            Add(new ProductSearch { IpAdress = "qwert", ProductId = product.Id, Date = DateTime.Now });
+            Add(new ProductSearch { IpAdress = "qwert", ProductId = product.Id, Date = DateTime.Now });
+            Add(new ProductSearch { IpAdress = "qwert", ProductId = product.Id, Date = DateTime.Now.AddDays(-1) });
+            Add(new ProductSearch { IpAdress = "qwert", ProductId = product.Id, Date = DateTime.Now.AddDays(-2) });
+            Add(new ProductSearch { IpAdress = "qwert", ProductId = product.Id, Date = DateTime.Now.AddDays(-3) });
 
             SaveChanges();
         }

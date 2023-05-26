@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using RetailerGuru.Api.Controllers.Models;
 using RetailerGuru.Api.Infrastructure;
 using RetailerGuru.Api.Infrastructure.Versions;
 using RetailerGuru.Core.Queries.Statistics;
@@ -17,28 +18,28 @@ namespace RetailerGuru.Api.Controllers.Private
         }
 
         // TODO: Vll ActionResult austauschen
-        [HttpGet("GetDailyProductSearchStatistic/{productId}/{from}/{to}")]
-        public IActionResult GetDailyProductSearchStatistic(int productId, DateTime from, DateTime to)
+        [HttpPost("GetDailyProductSearchStatistic")]
+        public IActionResult GetDailyProductSearchStatistic([FromBody] StatisticModel<int> model)
         {
-            return Ok(_mediator.Send(new GetDailyProductSearch.Query { Id = productId, From = from, To = to }));
+            return Ok(_mediator.Send(new GetDailyProductSearch.Query { ProductId = model.Id, From = model.From, To = model.To }));
         }
 
-        [HttpGet("GetDailyCompanyProductSearchStatistic/{companyId}/{from}/{to}")]
-        public IActionResult GetDailyCompanySearchStatistic(Guid companyId, DateTime from, DateTime to)
+        [HttpPost("GetDailyCompanyProductSearchStatistic")]
+        public IActionResult GetDailyCompanySearchStatistic([FromBody] StatisticModel<Guid> model)
         {
-            return Ok(_mediator.Send(new GetDailyCompanyProductSearch.Query { CompanyId = companyId, From = from, To = to }));
+            return Ok(_mediator.Send(new GetDailyCompanyProductSearch.Query { CompanyId = model.Id, From = model.From, To = model.To }));
         }
 
-        [HttpGet("GetDailyProductVerifiedSalesStatistic/{productId}/{from}/{to}")]
-        public IActionResult GetDailyProductVerifiedSalesStatistic(int productId, DateTime from, DateTime to)
+        [HttpPost("GetDailyProductVerifiedSalesStatistic")]
+        public IActionResult GetDailyProductVerifiedSalesStatistic([FromBody] StatisticModel<int> model)
         {
-            return Ok(_mediator.Send(new GetDailyProductVerifiedSales.Query { ProductId = productId, From = from, To = to }));
+            return Ok(_mediator.Send(new GetDailyProductVerifiedSales.Query { ProductId = model.Id, From = model.From, To = model.To }));
         }
 
-        [HttpGet("GetDailyCompanyVerifiedSalesStatistic/{companyId}/{from}/{to}")]
-        public IActionResult GetDailyCompanyVerifiedSalesStatistic(Guid companyId, DateTime from, DateTime to)
+        [HttpPost("GetDailyCompanyVerifiedSalesStatistic")]
+        public IActionResult GetDailyCompanyVerifiedSalesStatistic([FromBody] StatisticModel<Guid> model)
         {
-            return Ok(_mediator.Send(new GetDailyCompanyVerifiedSales.Query { CompanyId = companyId, From = from, To = to }));
+            return Ok(_mediator.Send(new GetDailyCompanyVerifiedSales.Query { CompanyId = model.Id, From = model.From, To = model.To }));
         }
 
     }

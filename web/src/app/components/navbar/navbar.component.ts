@@ -15,6 +15,7 @@ export class NavbarComponent implements OnInit {
   closeResult = '';
 
   ngOnInit() {
+
   }
 
   isUserAuthenticated() {
@@ -28,7 +29,8 @@ export class NavbarComponent implements OnInit {
     localStorage.removeItem("companyId");
 
     // TODO: echte landingpage einfügen
-    this.router.navigate(["#"])
+    this.router.navigate(["home"])
+    window.location.reload();
   }
 
   openModal(content : any){

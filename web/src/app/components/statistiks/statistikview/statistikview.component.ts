@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ChartComponent } from 'ng-apexcharts/lib/chart/chart.component';
-import { ChartOptions } from 'src/app/models/chart-options';
+import { ActivatedRoute } from '@angular/router';
+import { GlobalService } from 'src/clients/global_service';
 
 @Component({
   selector: 'app-statistikview',
@@ -9,29 +9,11 @@ import { ChartOptions } from 'src/app/models/chart-options';
 })
 export class StatistikviewComponent implements OnInit {
 
-  @ViewChild("chart") chart!: ChartComponent;
-  public chartOptions: Partial<ChartOptions> | any;
+  productId : number = 0;
 
-  constructor()
-  {
-    this.chartOptions = {
-      series: [
-        {
-          name: "My-series",
-          data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
-        }
-      ],
-      chart: {
-        height: 350,
-        type: "bar"
-      },
-      title: {
-        text: "My First Angular Chart"
-      },
-      xaxis: {
-        categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept"]
-      }
-    };
+  constructor(private route : ActivatedRoute) {
+    let routeParams = this.route.snapshot.paramMap;
+    this.productId = +(routeParams.get('productId') ?? "0");
   }
 
   ngOnInit() {
