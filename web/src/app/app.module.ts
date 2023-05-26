@@ -16,6 +16,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { BearerAuthInterceptor } from 'src/clients/bearerInterceptor';
 import { SearchComponent } from './components/search/search.component';
 
+
 export function tokenGetter(){
   return localStorage.getItem("jwt")
 }
