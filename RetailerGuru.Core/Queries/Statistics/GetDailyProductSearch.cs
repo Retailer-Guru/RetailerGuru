@@ -12,7 +12,7 @@ namespace RetailerGuru.Core.Queries.Statistics
         public class Query : IQuery<Result>
         {
             [Required]
-            public int Id { get; set; }
+            public int ProductId { get; set; }
 
             [Required]
             public DateTime From { get; set; }
@@ -40,7 +40,7 @@ namespace RetailerGuru.Core.Queries.Statistics
 
             public override async Task<Result?> Handle(Query request, CancellationToken cancellationToken)
             {
-                var product = await _context.Set<Product>().FirstOrDefaultAsync(x => x.Id == request.Id);
+                var product = await _context.Set<Product>().FirstOrDefaultAsync(x => x.Id == request.ProductId);
 
                 if (product is null)
                     return null;
@@ -48,13 +48,13 @@ namespace RetailerGuru.Core.Queries.Statistics
                 return new Result
                 {
                     Items = await _context.Set<ProductSearch>()
-                    .Where(x => x.ProductId == product.Id 
-                        && x.Date >= request.From 
-                        && x.Date <= request.To)
-                    .GroupBy(x => new { x.Date.Year, x.Date.Month, x.Date.Day })
+                    .Where(x => x.ProductId == request.ProductId 
+                        && x.Date.Date >= request.From.Date 
+                        && x.Date.Date <= request.To.Date)
+                    .GroupBy(x => new { x.Date.Date})
                     .Select(x => new Result.Item
                     {
-                        Date = new DateTime().AddYears(x.Key.Year).AddMonths(x.Key.Month).AddDays(x.Key.Day),
+                        Date = x.Key.Date,
                         Count = x.Count()
                     }).ToListAsync()
                 };

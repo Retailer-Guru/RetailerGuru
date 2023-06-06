@@ -48,8 +48,8 @@ namespace RetailerGuru.Core.Queries.Statistics
                 {
                     Items = await _context.Set<VerifiedSale>()
                         .Where(x => x.Product.CompanyId == request.CompanyId
-                            && x.Date >= request.From
-                            && x.Date <= request.To)
+                            && x.Date.Date >= request.From.Date
+                            && x.Date.Date <= request.To.Date)
                         .GroupBy(x => new { x.Date.Year, x.Date.Month, x.Date.Day })
                         .Select(x => new Result.Item
                         {

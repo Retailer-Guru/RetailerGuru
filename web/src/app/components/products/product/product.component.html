@@ -1,15 +1,16 @@
-<div  style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
+<div class="border border-dark" style="width: 18rem;">
+  <img [src]="'assets/images/Image_not_available.png'" class="card-img-top border" alt="...">
   <div class="card-body">
     <h5 class="card-title">{{product.name}}</h5>
     <p class="card-text">
     </p>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productEditModal">
-      Edit Product
-    </button>
-    <button type="button" class="btn btn-danger" (click)="delete()">Löschen</button>
+    <br>
+    <button *ngIf="!viewOnly" type="button" class="container btn btn-primary rounded-0" data-bs-toggle="modal" data-bs-target="#productEditModal"> Edit Product </button>
+    <button *ngIf="!viewOnly" type="button" class="container btn btn-danger rounded-0" (click)="delete()">Löschen</button>
+    <button *ngIf="!viewOnly" class="container btn btn-secondary btn-block rounded-0" type="button" [routerLink]="['/statisticsview', product.id]">Show Statistics</button>
   </div>
 </div>
+<br>
 
 <!-- Modal -->
 <div class="modal fade" id="productEditModal" tabindex="-1" aria-labelledby="productEditModalLabel" aria-hidden="true">

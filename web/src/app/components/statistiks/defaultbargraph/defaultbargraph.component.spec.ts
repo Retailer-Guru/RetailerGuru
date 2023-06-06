@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { DailyproductsearchComponent } from './dailyproductsearch.component';
+import { DefaultbargraphComponent } from './defaultbargraph.component';
 
-describe('DailyproductsearchComponent', () => {
-  let component: DailyproductsearchComponent;
-  let fixture: ComponentFixture<DailyproductsearchComponent>;
+describe('DefaultbargraphComponent', () => {
+  let component: DefaultbargraphComponent;
+  let fixture: ComponentFixture<DefaultbargraphComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DailyproductsearchComponent ]
+      declarations: [ DefaultbargraphComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DailyproductsearchComponent);
+    fixture = TestBed.createComponent(DefaultbargraphComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
