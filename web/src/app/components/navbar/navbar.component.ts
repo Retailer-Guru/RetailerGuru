@@ -37,8 +37,6 @@ export class NavbarComponent implements OnInit {
   }
 
   closeModal() {
-    console.log("test");
-
     this.modalService.dismissAll();
   }
 

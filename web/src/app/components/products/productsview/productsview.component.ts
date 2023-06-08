@@ -18,10 +18,15 @@ export class ProductsviewComponent implements OnInit {
     this.loadData();
   }
 
-  private loadData(){
+  loadData(){
+    let newItem = new Product();
+    newItem.id = 0;
+    newItem.name = "Add New Product";
+
     this.client.getObject<ItemList<Product>>("/api/v1-spa/Product/GetProdcuts")
       .subscribe(res => {
         this.products = res.items;
+        this.products.push(newItem);
       })
   }
 

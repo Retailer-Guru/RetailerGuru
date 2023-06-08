@@ -5,39 +5,42 @@
     <p class="card-text">
     </p>
     <br>
-    <button *ngIf="!viewOnly" type="button" class="container btn btn-primary rounded-0" data-bs-toggle="modal" data-bs-target="#productEditModal"> Edit Product </button>
-    <button *ngIf="!viewOnly" type="button" class="container btn btn-danger rounded-0" (click)="delete()">Löschen</button>
-    <button *ngIf="!viewOnly" class="container btn btn-secondary btn-block rounded-0" type="button" [routerLink]="['/statisticsview', product.id]">Show Statistics</button>
+    <button *ngIf="!viewOnly && !newProduct" type="button" class="container btn btn-primary rounded-0" (click)="openModal(editModal)"> Edit Product </button>
+    <button *ngIf="!viewOnly && !newProduct" type="button" class="container btn btn-danger rounded-0" (click)="openModal(deleteModal)">Löschen</button>
+    <button *ngIf="!viewOnly && !newProduct" class="container btn btn-secondary btn-block rounded-0" type="button" [routerLink]="['/statisticsview', product.id]">Show Statistics</button>
+    <button *ngIf="!viewOnly && newProduct" type="button" class="container btn btn-success rounded-0" (click)="openModal(editModal)">NewProduct</button>
   </div>
 </div>
 <br>
 
 <!-- Modal -->
-<div class="modal fade" id="productEditModal" tabindex="-1" aria-labelledby="productEditModalLabel" aria-hidden="true">
+<ng-template #editModal let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Product</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<app-editproduct
+      [modelId]="product.id"
+      (reload)="forceExternalReload($event)"></app-editproduct>
+	</div>
+</ng-template>
+<ng-template #deleteModal class="modal fade" id="productDeleteModal" tabindex="-1" aria-labelledby="productDeleteModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="productEditModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="productEditModalLabel">Delete Element</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <app-editproduct
-        [modelId]="product.id"></app-editproduct>
+        <h3>Should the element really be deleted?</h3>
+        <div class="row">
+          <div class="col-sm-6">
+          </div>
+          <button type="button" class="col-md-2 btn btn-secondary btn-block" data-bs-dismiss="modal" aria-label="Close">Cancle</button>
+          <button type="button" class="col-md-4 btn btn-primary btn-block" (click)="delete()">Enter</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div class="modal fade" id="productDeleteModal" tabindex="-1" aria-labelledby="productDeleteModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="productEditModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <app-editproduct
-        [modelId]="product.id"></app-editproduct>
-      </div>
-    </div>
-  </div>
-</div>
+</ng-template>

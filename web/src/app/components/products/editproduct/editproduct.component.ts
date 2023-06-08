@@ -12,21 +12,19 @@ export class EditproductComponent implements OnInit {
   @Input() modelId : number = 0;
   @Output() reload = new EventEmitter<boolean>();
 
-  product : Product = new Product();
+  editproduct : Product = new Product();
   companyId : string = "";
 
   constructor(private client : GlobalService) {  }
 
   ngOnInit() {
-    if(!this.modelId)
+    if(!this.modelId || this.modelId === 0)
       return;
 
-    if(this.modelId != 0){
-      this.client.getObject<Product>("/api/v1-spa/Product/GetProduct/" + this.modelId?.toString())
-        .subscribe(res => {
-          this.product = res;
-        });
-    }
+    this.client.getObject<Product>("/api/v1-spa/Product/GetProduct/" + this.modelId?.toString())
+      .subscribe(res => {
+        this.editproduct = res;
+      });
   }
 
   submit(cancel : boolean){
@@ -34,21 +32,21 @@ export class EditproductComponent implements OnInit {
       this.reload.emit(false);
     }
 
-    this.product.companyId = localStorage.getItem("companyId") ?? "";
+    this.editproduct.companyId = localStorage.getItem("companyId") ?? "";
 
     if(this.modelId == 0){
-      this.client.postObject<Product>("/api/v1-spa/Product/AddProduct", this.product)
+      this.client.postObject<Product>("/api/v1-spa/Product/AddProduct", this.editproduct)
         .subscribe(() => {
           this.reload.emit(true);
         });
     }
     else{
-      this.client.postObject<Product>("/api/v1-spa/Product/UpdateProduct", this.product)
+      this.client.postObject<Product>("/api/v1-spa/Product/UpdateProduct", this.editproduct)
         .subscribe(() => {
           this.reload.emit(true);
         });
     }
--
+
     this.reload.emit(false);
   }
 

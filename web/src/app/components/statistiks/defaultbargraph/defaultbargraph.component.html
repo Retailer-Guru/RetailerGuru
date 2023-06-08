@@ -1,5 +1,5 @@
 <br>
-<div style="text-align:center">
+<div style="text-align:center" *ngIf="isDataLoaded">
   <apx-chart #chart
     [series]="chartOptions?.series"
     [chart]="chartOptions?.chart"
