@@ -15,6 +15,12 @@ export class AboutusComponent implements OnInit {
 
   bild1:string = 'assets/images/1234.png';
   bild2:string = 'assets/images/bild2.png';
+  bild3:string = 'assets/images/bild5.jpg';
+  bild4:string = 'assets/images/bild6.jpg';
+  bild5:string = 'assets/images/bild7.jpg';
+  bild6:string = 'assets/images/bild8.jpg';
+  bild7:string = 'assets/images/bild9.jpg';
+  bild8:string = 'assets/images/bild4.jpg';
 
   isUserAuthenticated() {
     const token = localStorage.getItem("jwt");
